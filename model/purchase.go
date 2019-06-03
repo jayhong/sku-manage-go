@@ -12,7 +12,7 @@ type Purchase struct {
 	ID        uint32 `gorm:"primary_key" json:"id"`
 	Name      string `json:"name"`
 	Size      string `json:"size"`
-	Sku       string `gorm:"type:varchar(64);unique_index" json:"sku"`
+	Sku       string `gorm:"type:varchar(64)" json:"sku"`
 	Num       int    `json:"number"`
 	RoleId    uint32 `json:"role_id"`
 	CreatedAt time.Time

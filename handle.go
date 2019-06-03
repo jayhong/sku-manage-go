@@ -262,6 +262,11 @@ func (this *AccountService) delete_role_handle(w http.ResponseWriter, r *http.Re
 		this.ResponseErrCode(w, errCode)
 		return
 	}
+
+	if errCode := model.DeletePurchaseByRoleId(inParam["role_id"]); errCode != mixin.StatusOK {
+		this.ResponseErrCode(w, errCode)
+		return
+	}
 	this.ResponseOK(w, nil)
 }
 

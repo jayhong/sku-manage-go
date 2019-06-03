@@ -39,6 +39,7 @@ func DBInit() {
 	)
 
 	db.Model(&Department{}).AddUniqueIndex("idx_user_name_age", "name", "size")
+	db.Model(&Purchase{}).AddUniqueIndex("idx_role_id_sku", "role_id", "sku")
 	db.LogMode(true)
 
 }
