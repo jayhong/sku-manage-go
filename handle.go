@@ -882,6 +882,8 @@ func (this *AccountService) list_department_handle(w http.ResponseWriter, r *htt
 		skus := strings.Split(skuMap[model.SkuMapKey{deps[i].Name, deps[i].Size}], ",")
 		if len(skus) > 0 && skus[0] != "" {
 			deps[i].Skus = skus
+		}else {
+			deps[i].Skus = []string{}
 		}
 	}
 

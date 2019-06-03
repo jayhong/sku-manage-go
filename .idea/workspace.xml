@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="33b2fb60-2e0c-455f-b479-b56d5493dda3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handle.go" beforeDir="false" afterPath="$PROJECT_DIR$/handle.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/log/sku-manage/sku-manage.log.201906030800" beforeDir="false" afterPath="$PROJECT_DIR$/log/sku-manage/sku-manage.log.201906030800" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/db.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/purchase.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/purchase.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,11 +13,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="353">
-              <caret line="215" column="10" lean-forward="true" selection-start-line="215" selection-start-column="10" selection-end-line="215" selection-end-column="10" />
+            <state relative-caret-position="280">
+              <caret line="199" column="38" lean-forward="true" selection-start-line="199" selection-start-column="38" selection-end-line="199" selection-end-column="38" />
               <folding>
                 <element signature="e#14#101#0" expanded="true" />
               </folding>
@@ -55,11 +52,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/handle.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="353">
-              <caret line="268" column="5" selection-start-line="268" selection-start-column="5" selection-end-line="268" selection-end-column="5" />
+            <state relative-caret-position="369">
+              <caret line="885" column="36" selection-start-line="885" selection-start-column="36" selection-end-line="885" selection-end-column="36" />
               <folding>
                 <element signature="n#!!block;n#user#0" />
                 <element signature="n#!!block;n#create_user_handle#0" />
@@ -152,8 +149,8 @@
       <find>update</find>
       <find>add_depar</find>
       <find>url</find>
-      <find>department</find>
       <find>purchase</find>
+      <find>department</find>
     </findStrings>
     <replaceStrings>
       <replace>Sku</replace>
@@ -201,8 +198,8 @@
         <option value="$PROJECT_DIR$/model/sku.go" />
         <option value="$PROJECT_DIR$/model/department.go" />
         <option value="$PROJECT_DIR$/model/purchase.go" />
-        <option value="$PROJECT_DIR$/handle.go" />
         <option value="$PROJECT_DIR$/model/db.go" />
+        <option value="$PROJECT_DIR$/handle.go" />
       </list>
     </option>
   </component>
@@ -612,10 +609,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/routes.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="199" column="38" lean-forward="true" selection-start-line="199" selection-start-column="38" selection-end-line="199" selection-end-column="38" />
+          <folding>
+            <element signature="e#14#101#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/handle.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="268" column="5" selection-start-line="268" selection-start-column="5" selection-end-line="268" selection-end-column="5" />
+        <state relative-caret-position="369">
+          <caret line="885" column="36" selection-start-line="885" selection-start-column="36" selection-end-line="885" selection-end-column="36" />
           <folding>
             <element signature="n#!!block;n#user#0" />
             <element signature="n#!!block;n#create_user_handle#0" />
@@ -635,16 +642,6 @@
             <element signature="n#!!block;n#update_group_handle#0" />
             <element signature="n#!!block;n#add_group_handle#0" />
             <element signature="n#!!block;n#del_group_handle#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="215" column="10" lean-forward="true" selection-start-line="215" selection-start-column="10" selection-end-line="215" selection-end-column="10" />
-          <folding>
-            <element signature="e#14#101#0" expanded="true" />
           </folding>
         </state>
       </provider>
