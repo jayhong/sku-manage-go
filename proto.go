@@ -24,7 +24,6 @@ type LoginResponse struct {
 	UserId     uint32        `json:"user_id" valid:"required"`
 	UserName   string        `json:"username"`
 	Permission []string      `json:"permission"`
-	Role       model.Role    `json:"role"`
 	Company    model.Company `json:"company"`
 	Group      model.Group   `json:"group"`
 	Department string        `json:"department"`
@@ -34,17 +33,15 @@ type LoginResponse struct {
 }
 
 type UserInfoResponse struct {
-	UserId     uint32           `json:"id"`
-	UserName   string           `json:"username"`
-	Ip         string           `json:"last_ip"`
-	LastTime   int64            `json:"last_time"`
-	Enable     int              `json:"enable"`
-	Descript   string           `json:"descript"`
-	CreatedAt  int64            `json:"created_at"`
-	Role       model.Role       `json:"role"`
-	Company    model.Company    `json:"company"`
-	Group      model.Group      `json:"group"`
-	Department model.Department `json:"department"`
+	UserId    uint32        `json:"id"`
+	UserName  string        `json:"username"`
+	Ip        string        `json:"last_ip"`
+	LastTime  int64         `json:"last_time"`
+	Enable    int           `json:"enable"`
+	Descript  string        `json:"descript"`
+	CreatedAt int64         `json:"created_at"`
+	Company   model.Company `json:"company"`
+	Group     model.Group   `json:"group"`
 }
 
 type UserListResponse struct {
@@ -83,9 +80,13 @@ type ListGroupResp struct {
 	CompanyName string `json:"company_name"`
 }
 
-type ListRoleResp struct {
-	ID       uint32   `json:"role_id"`
-	RoleName string   `json:"role_name"`
-	Descript string   `json:"descript"`
-	Perm     []string `json:"permission"`
+type ConfigJsonBody struct {
+	Id          string `json:"captcha_id"`
+	VerifyValue string `json:"verify_value"`
+}
+
+type UserTree struct {
+	ID       uint32     `json:"id"`
+	Lable    string     `json:"label"`
+	Children []UserTree `json:"children"`
 }
