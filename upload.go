@@ -15,8 +15,8 @@ import (
 	"github.com/sirupsen/logrus"
 )
 // 修改成可配置
-const host = "https://dyjr8.com/file/"
-const PICTUREDIR = "./"
+const host = "https://127.0.0.1/file/"
+const PICTUREDIR = "./file"
 
 func (this *AccountService) upload_file_handle(w http.ResponseWriter, r *http.Request) {
 	r.ParseMultipartForm(32 << 20)

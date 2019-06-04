@@ -84,6 +84,9 @@ func main() {
 	}
 	go server.StartHttpServer(srv, fmt.Sprintf(":%d", *serverPort), config.SrvConfig.Server.ConnLimit)
 
+	http.Handle("/file/", http.StripPrefix("/file/", http.FileServer(http.Dir("./file"))))
+	go http.ListenAndServe(":8080", nil)
+
 	// subscribe to SIGINT signals
 	stopChan := make(chan os.Signal)
 	signal.Notify(stopChan, os.Interrupt)
