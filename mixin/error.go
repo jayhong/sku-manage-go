@@ -32,7 +32,7 @@ const (
 	ErrRoleNameExist           ErrorCode = 4018
 	ErrorGroupNameExist        ErrorCode = 4019
 	ErrorDelBill               ErrorCode = 4020
-	ErrorRoleNoExist           ErrorCode = 4021
+	ErrorOrderNoExist           ErrorCode = 4021
 	ErrorNoPermission          ErrorCode = 4022
 	ErrorSizeParamError        ErrorCode = 4023
 
@@ -70,7 +70,7 @@ func init() {
 		ErrRoleNameExist:           "角色名已存在",
 		ErrorGroupNameExist:        "分组名已存在",
 		ErrorDelBill:               "只能修改处于草稿中的进件",
-		ErrorRoleNoExist:           "用户角色不存在",
+		ErrorOrderNoExist:           "进货单不存在",
 		ErrorNoPermission:          "无权限",
 		ErrorNoSkus:                "sku不存在",
 		ErrorSizeParamError:        "款式不能为空",

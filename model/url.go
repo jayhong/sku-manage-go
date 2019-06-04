@@ -7,12 +7,10 @@ import (
 )
 
 type URL struct {
-	ID            uint32 `gorm:"primary_key" json:"url_id"`
-	Url           string `json:"url"`
-	Status        bool   `json:"status"`
-	Collected     bool   `json:"collected"`
-	Type          string `gorm:"-" json:"type"`
-	CollectedType string `gorm:"-" json:"collect_type"`
+	ID     uint32 `gorm:"primary_key" json:"url_id"`
+	Url    string `json:"url"`
+	Status bool   `json:"status"`
+	Type   string `gorm:"-" json:"type"` // 用于前端展示
 }
 
 func GetAllURL() ([]URL, mixin.ErrorCode) {
@@ -26,13 +24,13 @@ func GetAllURL() ([]URL, mixin.ErrorCode) {
 	return urls, mixin.StatusOK
 }
 
-func CreateURL(url URL) mixin.ErrorCode {
+func CreateURL(url URL) (uint32, mixin.ErrorCode) {
 	if err := db.Create(&url).Error; err != nil {
 		logrus.Errorf("[CreateURL] create error %s", err.Error())
-		return mixin.ErrorServerDb
+		return 0, mixin.ErrorServerDb
 	}
 
-	return mixin.StatusOK
+	return url.ID, mixin.StatusOK
 }
 
 func UpdateURL(url URL) mixin.ErrorCode {

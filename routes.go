@@ -20,22 +20,12 @@ func (s *AccountService) GetRoutes() []server.Route {
 			Pattern:     "/login",
 			HandlerFunc: s.login_handle,
 		},
-
-		server.Route{
-			Name:        "reset password",
-			Method:      "GET",
-			Pattern:     "/{user_id:[0-9]+}/password/reset",
-			HandlerFunc: s.reset_password_handle,
-			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
-		},
-
 		server.Route{
 			Name:        "Captcha",
 			Method:      "GET",
 			Pattern:     "/get_captcha",
 			HandlerFunc: s.get_captcha_handle,
 		},
-
 		server.Route{
 			Name:        "Captcha",
 			Method:      "POST",
@@ -44,13 +34,19 @@ func (s *AccountService) GetRoutes() []server.Route {
 		},
 
 		server.Route{
+			Name:        "reset password",
+			Method:      "GET",
+			Pattern:     "/{user_id:[0-9]+}/password/reset",
+			HandlerFunc: s.reset_password_handle,
+			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
+		},
+		server.Route{
 			Name:        "update password",
 			Method:      "POST",
 			Pattern:     "/{user_id:[0-9]+}/password/update",
 			HandlerFunc: s.update_password_handle,
 			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
 		},
-
 		server.Route{
 			Name:        "create user",
 			Method:      "POST",
@@ -58,7 +54,6 @@ func (s *AccountService) GetRoutes() []server.Route {
 			HandlerFunc: s.create_user_handle,
 			//			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
 		},
-
 		server.Route{
 			Name:        "update user",
 			Method:      "POST",
@@ -66,7 +61,6 @@ func (s *AccountService) GetRoutes() []server.Route {
 			HandlerFunc: s.update_user_handle,
 			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
 		},
-
 		server.Route{
 			Name:        "delete user",
 			Method:      "POST",
@@ -74,7 +68,6 @@ func (s *AccountService) GetRoutes() []server.Route {
 			HandlerFunc: s.delete_user_handle,
 			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
 		},
-
 		server.Route{
 			Name:        "user list",
 			Method:      "GET",
@@ -82,7 +75,6 @@ func (s *AccountService) GetRoutes() []server.Route {
 			HandlerFunc: s.user_list_handle,
 			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
 		},
-
 		server.Route{
 			Name:        "user info",
 			Method:      "GET",
@@ -90,14 +82,12 @@ func (s *AccountService) GetRoutes() []server.Route {
 			HandlerFunc: s.user_info_handle,
 			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
 		},
-
 		server.Route{
 			Name:        "user info",
 			Method:      "GET",
 			Pattern:     "/user/info",
 			HandlerFunc: s.user_info_handle,
 		},
-
 		server.Route{
 			Name:        "list company",
 			Method:      "GET",
@@ -105,7 +95,6 @@ func (s *AccountService) GetRoutes() []server.Route {
 			HandlerFunc: s.list_company_handle,
 			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
 		},
-
 		server.Route{
 			Name:        "add company",
 			Method:      "POST",
@@ -113,7 +102,6 @@ func (s *AccountService) GetRoutes() []server.Route {
 			HandlerFunc: s.add_company_handle,
 			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
 		},
-
 		server.Route{
 			Name:        "update company",
 			Method:      "POST",
@@ -121,15 +109,13 @@ func (s *AccountService) GetRoutes() []server.Route {
 			HandlerFunc: s.update_company_handle,
 			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
 		},
-
 		server.Route{
 			Name:        "delete company",
 			Method:      "POST",
-			Pattern:     "/{user_id:[0-9]+}/company/del",
+			Pattern:     "/{user_id:[0-9]+}/company/delete",
 			HandlerFunc: s.del_company_handle,
 			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
 		},
-
 		server.Route{
 			Name:        "add group",
 			Method:      "POST",
@@ -147,7 +133,7 @@ func (s *AccountService) GetRoutes() []server.Route {
 		server.Route{
 			Name:        "delete group",
 			Method:      "POST",
-			Pattern:     "/{user_id:[0-9]+}/group/del",
+			Pattern:     "/{user_id:[0-9]+}/group/delete",
 			HandlerFunc: s.del_group_handle,
 			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
 		},
@@ -158,7 +144,6 @@ func (s *AccountService) GetRoutes() []server.Route {
 			HandlerFunc: s.list_group_handle,
 			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
 		},
-
 		server.Route{
 			Name:        "group list",
 			Method:      "GET",
@@ -166,7 +151,6 @@ func (s *AccountService) GetRoutes() []server.Route {
 			HandlerFunc: s.group_list,
 			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
 		},
-
 		server.Route{
 			Name:        "dict",
 			Method:      "GET",
@@ -174,7 +158,6 @@ func (s *AccountService) GetRoutes() []server.Route {
 			HandlerFunc: s.dict_handle,
 			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
 		},
-
 		server.Route{
 			Name:        "tree",
 			Method:      "GET",
@@ -182,8 +165,6 @@ func (s *AccountService) GetRoutes() []server.Route {
 			HandlerFunc: s.tree_handle,
 			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
 		},
-
-
 		//PC上传文件接口
 		server.Route{
 			Name:        "upload file",
@@ -192,62 +173,143 @@ func (s *AccountService) GetRoutes() []server.Route {
 			HandlerFunc: s.upload_file_handle,
 		},
 
-		// 款式管理
+		//url 管理
 		server.Route{
-			Name:        "list department",
+			Name:        "add url",
 			Method:      "POST",
-			Pattern:     "/{user_id:[0-9]+}/department",
-			HandlerFunc: s.list_department_handle,
+			Pattern:     "/{user_id:[0-9]+}/url/add",
+			HandlerFunc: s.add_url_handle,
 			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
 		},
 		server.Route{
-			Name:        "add department",
-			Method:      "POST",
-			Pattern:     "/{user_id:[0-9]+}/department/add",
-			HandlerFunc: s.add_department_handle,
+			Name:        "list url",
+			Method:      "GET",
+			Pattern:     "/{user_id:[0-9]+}/url/list",
+			HandlerFunc: s.list_url_handle,
 			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
 		},
 		server.Route{
-			Name:        "add departments",
+			Name:        "delete url",
 			Method:      "POST",
-			Pattern:     "/{user_id:[0-9]+}/department/mutiadd",
-			HandlerFunc: s.batch_add_department_handle,
+			Pattern:     "/{user_id:[0-9]+}/url/delete",
+			HandlerFunc: s.del_url_handle,
 			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
 		},
 		server.Route{
-			Name:        "department",
+			Name:        "update url ",
 			Method:      "POST",
-			Pattern:     "/{user_id:[0-9]+}/department/update",
-			HandlerFunc: s.update_department_handle,
+			Pattern:     "/{user_id:[0-9]+}/url/update",
+			HandlerFunc: s.update_url_handle,
+			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
+		},
+		server.Route{
+			Name:        "Check url status",
+			Method:      "GET",
+			Pattern:     "/{user_id:[0-9]+}/url/status",
+			HandlerFunc: s.check_url_status,
+			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
+		},
+		server.Route{
+			Name:        "downloadurl",
+			Method:      "GET",
+			Pattern:     "/{user_id:[0-9]+}/url/download",
+			HandlerFunc: s.download_url_pic,
+			//Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
+		},
+
+
+		server.Route{
+			Name:        "add skuprops",
+			Method:      "GET",
+			Pattern:     "/{user_id:[0-9]+}/skuprops",
+			HandlerFunc: s.list_sku_props,
+			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
+		},
+		server.Route{
+			Name:        "add skuprops",
+			Method:      "POST",
+			Pattern:     "/{user_id:[0-9]+}/skuprops/add",
+			HandlerFunc: s.add_sku_props,
+			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
+		},
+		server.Route{
+			Name:        "delete skuprops",
+			Method:      "GET",
+			Pattern:     "/{user_id:[0-9]+}/skuprops/delete",
+			HandlerFunc: s.delete_sku_props,
+			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
+		},
+		server.Route{
+			Name:        "update skuprops",
+			Method:      "POST",
+			Pattern:     "/{user_id:[0-9]+}/skuprops/update",
+			HandlerFunc: s.update_sku_props,
+			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
+		},
+		server.Route{
+			Name:        "add size",
+			Method:      "POST",
+			Pattern:     "/{user_id:[0-9]+}/size/add",
+			HandlerFunc: s.add_size,
+			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
+		},
+		server.Route{
+			Name:        "delete size",
+			Method:      "GET",
+			Pattern:     "/{user_id:[0-9]+}/size/delete",
+			HandlerFunc: s.delete_size,
+			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
+		},
+		server.Route{
+			Name:        "update size",
+			Method:      "POST",
+			Pattern:     "/{user_id:[0-9]+}/size/update",
+			HandlerFunc: s.update_size,
+			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
+		},
+
+		// skus列表
+		server.Route{
+			Name:        "list skuprops",
+			Method:      "POST",
+			Pattern:     "/{user_id:[0-9]+}/skus",
+			HandlerFunc: s.list_skus,
+			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
+		},
+		server.Route{
+			Name:        "add sku",
+			Method:      "POST",
+			Pattern:     "/{user_id:[0-9]+}/sku/add",
+			HandlerFunc: s.add_sku,
 			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
 		},
 		server.Route{
 			Name:        "del department",
 			Method:      "POST",
-			Pattern:     "/{user_id:[0-9]+}/department/del",
-			HandlerFunc: s.del_department_handle,
+			Pattern:     "/{user_id:[0-9]+}/sku/delete",
+			HandlerFunc: s.del_sku,
 			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
 		},
 
 		server.Route{
-			Name:        "add role",
+			Name:        "add order",
 			Method:      "POST",
-			Pattern:     "/{user_id:[0-9]+}/role/add",
-			HandlerFunc: s.add_role_handle,
+			Pattern:     "/{user_id:[0-9]+}/order/add",
+			HandlerFunc: s.add_order_handle,
 			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
 		},
 		server.Route{
-			Name:        "update role",
+			Name:        "update order",
 			Method:      "POST",
-			Pattern:     "/{user_id:[0-9]+}/role/update",
-			HandlerFunc: s.update_role_handle,
+			Pattern:     "/{user_id:[0-9]+}/order/update",
+			HandlerFunc: s.update_order_handle,
 			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
 		},
 		server.Route{
 			Name:        "delete role",
 			Method:      "POST",
-			Pattern:     "/{user_id:[0-9]+}/role/del",
-			HandlerFunc: s.delete_role_handle,
+			Pattern:     "/{user_id:[0-9]+}/order/delete",
+			HandlerFunc: s.delete_order_handle,
 			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
 		},
 		server.Route{
@@ -289,60 +351,6 @@ func (s *AccountService) GetRoutes() []server.Route {
 			Pattern:     "/{user_id:[0-9]+}/purchase/update",
 			HandlerFunc: s.purchase_update,
 			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
-		},
-		server.Route{
-			Name:        "add url",
-			Method:      "POST",
-			Pattern:     "/{user_id:[0-9]+}/url/add",
-			HandlerFunc: s.add_url_handle,
-			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
-		},
-
-		server.Route{
-			Name:        "list url",
-			Method:      "GET",
-			Pattern:     "/{user_id:[0-9]+}/url/list",
-			HandlerFunc: s.list_url_handle,
-			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
-		},
-
-		server.Route{
-			Name:        "delete url",
-			Method:      "POST",
-			Pattern:     "/{user_id:[0-9]+}/url/delete",
-			HandlerFunc: s.del_url_handle,
-			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
-		},
-
-		server.Route{
-			Name:        "update url ",
-			Method:      "POST",
-			Pattern:     "/{user_id:[0-9]+}/url/update",
-			HandlerFunc: s.update_url_handle,
-			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
-		},
-
-
-		server.Route{
-			Name:        "Check url status",
-			Method:      "GET",
-			Pattern:     "/{user_id:[0-9]+}/url/status",
-			HandlerFunc: s.check_url_status,
-			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
-		},
-		server.Route{
-			Name:        "get url sku",
-			Method:      "GET",
-			Pattern:     "/{user_id:[0-9]+}/url/sku",
-			HandlerFunc: s.getUrlSkus,
-			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
-		},
-		server.Route{
-			Name:        "downloadurl",
-			Method:      "GET",
-			Pattern:     "/{user_id:[0-9]+}/url/download",
-			HandlerFunc: s.download_url_pic,
-			//Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
 		},
 	}
 }

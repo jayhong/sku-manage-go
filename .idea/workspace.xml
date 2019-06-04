@@ -2,8 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="33b2fb60-2e0c-455f-b479-b56d5493dda3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/model/size.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handle.go" beforeDir="false" afterPath="$PROJECT_DIR$/handle.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/sku-manage/sku-manage.log.201906030800" beforeDir="false" afterPath="$PROJECT_DIR$/log/sku-manage/sku-manage.log.201906030800" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mixin/error.go" beforeDir="false" afterPath="$PROJECT_DIR$/mixin/error.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/db.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/department.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/skuProp.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/purchase.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/purchase.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/role.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/purchaseOrder.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/sku.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/sku.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/url.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/url.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/routes.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,8 +26,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="199" column="38" lean-forward="true" selection-start-line="199" selection-start-column="38" selection-end-line="199" selection-end-column="38" />
+            <state relative-caret-position="462">
+              <caret line="334" column="34" lean-forward="true" selection-start-line="334" selection-start-column="34" selection-end-line="334" selection-end-column="34" />
               <folding>
                 <element signature="e#14#101#0" expanded="true" />
               </folding>
@@ -25,79 +35,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/url.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="520">
-              <caret line="36" column="5" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://D:/Go/src/net/http/header.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
-              <caret line="26" column="16" selection-start-line="26" selection-start-column="16" selection-end-line="26" selection-end-column="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../github.com/PuerkitoBio/goquery/type.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="728">
-              <caret line="37" column="5" selection-start-line="37" selection-start-column="5" selection-end-line="37" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/handle.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="369">
-              <caret line="885" column="36" selection-start-line="885" selection-start-column="36" selection-end-line="885" selection-end-column="36" />
-              <folding>
-                <element signature="n#!!block;n#user#0" />
-                <element signature="n#!!block;n#create_user_handle#0" />
-                <element signature="n#!!block;n#update_user_handle#0" />
-                <element signature="n#!!block;n#update_password_handle#0" />
-                <element signature="n#!!block;n#reset_password_handle#0" />
-                <element signature="n#!!block;n#verify_captcha_handle#0" />
-                <element signature="n#!!block;n#delete_user_handle#0" />
-                <element signature="n#!!block;n#user_list_handle#0" />
-                <element signature="n#!!block;n#user_info_handle#0" />
-                <element signature="n#!!block;n#list_company_handle#0" />
-                <element signature="n#!!block;n#add_company_handle#0" />
-                <element signature="n#!!block;n#update_company_handle#0" />
-                <element signature="n#!!block;n#del_company_handle#0" />
-                <element signature="n#!!block;n#list_group_handle#0" />
-                <element signature="n#!!block;n#group_list#0" />
-                <element signature="n#!!block;n#update_group_handle#0" />
-                <element signature="n#!!block;n#add_group_handle#0" />
-                <element signature="n#!!block;n#del_group_handle#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mixin/error.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="884">
-              <caret line="37" selection-start-line="37" selection-end-line="37" />
-              <folding>
-                <element signature="e#15#48#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model/purchase.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="104">
-              <caret line="10" column="13" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="13" />
+            <state relative-caret-position="483">
+              <caret line="64" column="1" lean-forward="true" selection-start-line="64" selection-start-column="1" selection-end-line="64" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -105,17 +47,112 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model/sku.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="416">
-              <caret line="20" column="30" selection-start-line="20" selection-start-column="30" selection-end-line="20" selection-end-column="30" />
+            <state relative-caret-position="289">
+              <caret line="88" selection-start-line="88" selection-end-line="88" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/model/department.go">
+        <entry file="file://$PROJECT_DIR$/model/skuProp.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="75" column="26" selection-start-line="75" selection-start-column="26" selection-end-line="75" selection-end-column="26" />
+            <state relative-caret-position="577">
+              <caret line="61" column="5" selection-start-line="61" selection-start-column="5" selection-end-line="61" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/model/url.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="446">
+              <caret line="32" column="18" selection-start-line="32" selection-start-column="18" selection-end-line="32" selection-end-column="18" />
+              <folding>
+                <element signature="e#15#76#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/handle.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="343">
+              <caret line="1057" column="24" selection-start-line="1057" selection-start-column="24" selection-end-line="1057" selection-end-column="24" />
+              <folding>
+                <element signature="n#!!block;n#login_handle#0" />
+                <element signature="n#!!block;n#get_captcha_handle#0" />
+                <element signature="e#2350#2819#0" />
+                <element signature="n#!!block;n#user#0" />
+                <element signature="n#!!block;n#create_user_handle#0" />
+                <element signature="n#!!block;n#update_user_handle#0" />
+                <element signature="e#4794#5288#0" />
+                <element signature="e#5375#6534#0" />
+                <element signature="e#6619#7263#0" />
+                <element signature="n#!!block;n#update_password_handle#0" />
+                <element signature="n#!!block;n#reset_password_handle#0" />
+                <element signature="e#8381#8747#0" />
+                <element signature="e#9489#10008#0" />
+                <element signature="e#10100#10642#0" />
+                <element signature="e#10731#11384#0" />
+                <element signature="e#10797#11679#0" />
+                <element signature="e#12764#13493#0" />
+                <element signature="e#13583#14126#0" />
+                <element signature="e#14213#14730#0" />
+                <element signature="e#14817#15520#0" />
+                <element signature="e#15602#15907#0" />
+                <element signature="e#16123#16760#0" />
+                <element signature="n#!!block;n#add_role_handle#0" />
+                <element signature="n#!!block;n#update_role_handle#0" />
+                <element signature="n#!!block;n#delete_role_handle#0" />
+                <element signature="n#!!block;n#list_role_handle#0" />
+                <element signature="e#7209#7438#0" />
+                <element signature="n#!!block;n#add_url_handle#0" />
+                <element signature="n#!!block;n#update_url_handle#0" />
+                <element signature="n#!!block;n#del_url_handle#0" />
+                <element signature="n#!!block;n#check_url_status#0" />
+                <element signature="n#!!block;n#download_url_pic#0" />
+                <element signature="e#12386#12391#0" />
+                <element signature="n#!!block;n#add_sku_props#0" />
+                <element signature="n#!!block;n#add_sku_props#1" />
+                <element signature="n#!!block;n#update_sku_props#1" />
+                <element signature="e#13920#13925#0" />
+                <element signature="e#12661#12665#0" />
+                <element signature="e#12752#12756#0" />
+                <element signature="e#12843#12847#0" />
+                <element signature="e#13863#14090#0" />
+                <element signature="n#!!block;n#del_department_handle#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/model/size.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="171">
+              <caret line="65" column="19" selection-start-line="65" selection-start-column="5" selection-end-line="65" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/proto.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="275">
+              <caret line="87" column="21" selection-start-line="87" selection-start-column="21" selection-end-line="87" selection-end-column="21" />
+              <folding>
+                <element signature="e#14#44#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/model/purchaseOrder.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="130">
+              <caret line="9" column="7" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -123,8 +160,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model/db.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="457">
-              <caret line="41" column="22" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
+            <state relative-caret-position="189">
+              <caret line="41" column="67" selection-start-line="41" selection-start-column="67" selection-end-line="41" selection-end-column="67" />
               <folding>
                 <element signature="e#15#153#0" expanded="true" />
               </folding>
@@ -145,16 +182,24 @@
     <findStrings>
       <find>upload</find>
       <find>Car</find>
-      <find>role</find>
       <find>update</find>
       <find>add_depar</find>
-      <find>url</find>
-      <find>purchase</find>
       <find>department</find>
+      <find>Department</find>
+      <find>Role</find>
+      <find>url</find>
+      <find>ErrorRoleNoExist</find>
+      <find>skuProp</find>
+      <find>role</find>
+      <find>del</find>
+      <find>purchase</find>
     </findStrings>
     <replaceStrings>
       <replace>Sku</replace>
       <replace>URL</replace>
+      <replace>SkuProp</replace>
+      <replace>Order</replace>
+      <replace>size</replace>
     </replaceStrings>
   </component>
   <component name="GOROOT" path="D:\Go" />
@@ -185,21 +230,25 @@
         <option value="$PROJECT_DIR$/bill_handle.go" />
         <option value="$PROJECT_DIR$/upload.go" />
         <option value="$PROJECT_DIR$/model/bill.go" />
-        <option value="$PROJECT_DIR$/proto.go" />
         <option value="$PROJECT_DIR$/model/user.go" />
         <option value="$PROJECT_DIR$/model/role.go" />
         <option value="$PROJECT_DIR$/spider.go" />
         <option value="$PROJECT_DIR$/main.go" />
         <option value="$PROJECT_DIR$/server/url.go" />
-        <option value="$PROJECT_DIR$/model/url.go" />
         <option value="$PROJECT_DIR$/url.go" />
-        <option value="$PROJECT_DIR$/mixin/error.go" />
-        <option value="$PROJECT_DIR$/routes.go" />
-        <option value="$PROJECT_DIR$/model/sku.go" />
         <option value="$PROJECT_DIR$/model/department.go" />
-        <option value="$PROJECT_DIR$/model/purchase.go" />
+        <option value="$PROJECT_DIR$/model/skuProps.go" />
+        <option value="$PROJECT_DIR$/mixin/error.go" />
+        <option value="$PROJECT_DIR$/model/purchaseOrder.go" />
+        <option value="$PROJECT_DIR$/model/url.go" />
+        <option value="$PROJECT_DIR$/model/size.go" />
+        <option value="$PROJECT_DIR$/model/skuProp.go" />
+        <option value="$PROJECT_DIR$/proto.go" />
         <option value="$PROJECT_DIR$/model/db.go" />
         <option value="$PROJECT_DIR$/handle.go" />
+        <option value="$PROJECT_DIR$/model/sku.go" />
+        <option value="$PROJECT_DIR$/routes.go" />
+        <option value="$PROJECT_DIR$/model/purchase.go" />
       </list>
     </option>
   </component>
@@ -215,7 +264,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -232,6 +280,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -267,7 +316,7 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15582451" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1580938" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -280,7 +329,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.24713585" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.4222586" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -292,17 +341,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/model/wind_control.go" />
-    <entry file="file://$PROJECT_DIR$/server/listen.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="52">
-          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-          <folding>
-            <element signature="e#16#49#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server/logger.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="52">
@@ -358,16 +396,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/route.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="52">
-          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-          <folding>
-            <element signature="e#16#94#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server/server.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="52">
@@ -413,16 +441,6 @@
     <entry file="file://$PROJECT_DIR$/model/guarantor.go" />
     <entry file="file://$PROJECT_DIR$/model/contract.go" />
     <entry file="file://$PROJECT_DIR$/model/sign.go" />
-    <entry file="file://$PROJECT_DIR$/proto.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2314">
-          <caret line="91" selection-start-line="91" selection-end-line="91" />
-          <folding>
-            <element signature="e#14#44#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/github.com/jinzhu/gorm/errors.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="156">
@@ -464,13 +482,6 @@
           <folding>
             <element signature="e#15#147#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/role.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1768">
-          <caret line="72" selection-start-line="56" selection-end-line="72" />
         </state>
       </provider>
     </entry>
@@ -517,16 +528,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/url.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="12" column="9" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
-          <folding>
-            <element signature="e#15#76#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/service.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="494">
@@ -568,51 +569,91 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/mixin/error.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="884">
-          <caret line="37" selection-start-line="37" selection-end-line="37" />
+        <state relative-caret-position="254">
+          <caret line="34" column="21" selection-start-line="34" selection-start-column="21" selection-end-line="34" selection-end-column="21" />
           <folding>
             <element signature="e#15#48#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/sku.go">
+    <entry file="file://$PROJECT_DIR$/server/route.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="20" column="30" selection-start-line="20" selection-start-column="30" selection-end-line="20" selection-end-column="30" />
+        <state relative-caret-position="93">
+          <caret line="10" column="5" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
+          <folding>
+            <element signature="e#16#94#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/department.go">
+    <entry file="file://$PROJECT_DIR$/model/url.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="75" column="26" selection-start-line="75" selection-start-column="26" selection-end-line="75" selection-end-column="26" />
+        <state relative-caret-position="446">
+          <caret line="32" column="18" selection-start-line="32" selection-start-column="18" selection-end-line="32" selection-end-column="18" />
+          <folding>
+            <element signature="e#15#76#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/purchase.go">
+    <entry file="file://$PROJECT_DIR$/model/size.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="13" />
+        <state relative-caret-position="171">
+          <caret line="65" column="19" selection-start-line="65" selection-start-column="5" selection-end-line="65" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/skuProp.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="577">
+          <caret line="61" column="5" selection-start-line="61" selection-start-column="5" selection-end-line="61" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/purchaseOrder.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="9" column="7" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="87" column="21" selection-start-line="87" selection-start-column="21" selection-end-line="87" selection-end-column="21" />
+          <folding>
+            <element signature="e#14#44#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/model/db.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="457">
-          <caret line="41" column="22" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
+        <state relative-caret-position="189">
+          <caret line="41" column="67" selection-start-line="41" selection-start-column="67" selection-end-line="41" selection-end-column="67" />
           <folding>
             <element signature="e#15#153#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/model/sku.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="88" selection-start-line="88" selection-end-line="88" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/routes.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="199" column="38" lean-forward="true" selection-start-line="199" selection-start-column="38" selection-end-line="199" selection-end-column="38" />
+        <state relative-caret-position="462">
+          <caret line="334" column="34" lean-forward="true" selection-start-line="334" selection-start-column="34" selection-end-line="334" selection-end-column="34" />
           <folding>
             <element signature="e#14#101#0" expanded="true" />
           </folding>
@@ -621,28 +662,59 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/handle.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="369">
-          <caret line="885" column="36" selection-start-line="885" selection-start-column="36" selection-end-line="885" selection-end-column="36" />
+        <state relative-caret-position="343">
+          <caret line="1057" column="24" selection-start-line="1057" selection-start-column="24" selection-end-line="1057" selection-end-column="24" />
           <folding>
+            <element signature="n#!!block;n#login_handle#0" />
+            <element signature="n#!!block;n#get_captcha_handle#0" />
+            <element signature="e#2350#2819#0" />
             <element signature="n#!!block;n#user#0" />
             <element signature="n#!!block;n#create_user_handle#0" />
             <element signature="n#!!block;n#update_user_handle#0" />
+            <element signature="e#4794#5288#0" />
+            <element signature="e#5375#6534#0" />
+            <element signature="e#6619#7263#0" />
             <element signature="n#!!block;n#update_password_handle#0" />
             <element signature="n#!!block;n#reset_password_handle#0" />
-            <element signature="n#!!block;n#verify_captcha_handle#0" />
-            <element signature="n#!!block;n#delete_user_handle#0" />
-            <element signature="n#!!block;n#user_list_handle#0" />
-            <element signature="n#!!block;n#user_info_handle#0" />
-            <element signature="n#!!block;n#list_company_handle#0" />
-            <element signature="n#!!block;n#add_company_handle#0" />
-            <element signature="n#!!block;n#update_company_handle#0" />
-            <element signature="n#!!block;n#del_company_handle#0" />
-            <element signature="n#!!block;n#list_group_handle#0" />
-            <element signature="n#!!block;n#group_list#0" />
-            <element signature="n#!!block;n#update_group_handle#0" />
-            <element signature="n#!!block;n#add_group_handle#0" />
-            <element signature="n#!!block;n#del_group_handle#0" />
+            <element signature="e#8381#8747#0" />
+            <element signature="e#9489#10008#0" />
+            <element signature="e#10100#10642#0" />
+            <element signature="e#10731#11384#0" />
+            <element signature="e#10797#11679#0" />
+            <element signature="e#12764#13493#0" />
+            <element signature="e#13583#14126#0" />
+            <element signature="e#14213#14730#0" />
+            <element signature="e#14817#15520#0" />
+            <element signature="e#15602#15907#0" />
+            <element signature="e#16123#16760#0" />
+            <element signature="n#!!block;n#add_role_handle#0" />
+            <element signature="n#!!block;n#update_role_handle#0" />
+            <element signature="n#!!block;n#delete_role_handle#0" />
+            <element signature="n#!!block;n#list_role_handle#0" />
+            <element signature="e#7209#7438#0" />
+            <element signature="n#!!block;n#add_url_handle#0" />
+            <element signature="n#!!block;n#update_url_handle#0" />
+            <element signature="n#!!block;n#del_url_handle#0" />
+            <element signature="n#!!block;n#check_url_status#0" />
+            <element signature="n#!!block;n#download_url_pic#0" />
+            <element signature="e#12386#12391#0" />
+            <element signature="n#!!block;n#add_sku_props#0" />
+            <element signature="n#!!block;n#add_sku_props#1" />
+            <element signature="n#!!block;n#update_sku_props#1" />
+            <element signature="e#13920#13925#0" />
+            <element signature="e#12661#12665#0" />
+            <element signature="e#12752#12756#0" />
+            <element signature="e#12843#12847#0" />
+            <element signature="e#13863#14090#0" />
+            <element signature="n#!!block;n#del_department_handle#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/purchase.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="64" column="1" lean-forward="true" selection-start-line="64" selection-start-column="1" selection-end-line="64" selection-end-column="1" />
         </state>
       </provider>
     </entry>

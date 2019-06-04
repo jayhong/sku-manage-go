@@ -6,16 +6,16 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-//alter  table  skus add unique index skus_index(sku,name);
 type Sku struct {
-	Sku  string `gorm:"type:varchar(64);primary_key"`
-	Name string `gorm:"type:varchar(64);primary_key"`
-	Size string `gorm:"type:varchar(64);primary_key"`
+	UrlID     uint32 `json:"url_id"`
+	SkuPropID uint32 `gorm:"primary_key" json:"sku_prop_id"`
+	SizeID    uint32 `gorm:"primary_key" json:"size_id"`
+	Sku       string `gorm:"type:varchar(64);primary_key"`
 }
 
 type SkuMapKey struct {
-	Name string
-	Size string
+	SkuPropID uint32
+	SizeID    uint32
 }
 
 func GetSku(skuStr string) (Sku, mixin.ErrorCode) {
@@ -36,33 +36,53 @@ func CreateSku(sku Sku) mixin.ErrorCode {
 	return mixin.StatusOK
 }
 
-func DeleteSkuByNameSize(name, size string) mixin.ErrorCode {
-	if err := db.Delete(Sku{}, "name = ? and size = ?", name, size).Error; err != nil {
-		logrus.Errorf("[User.Delete] Delete error %s", err.Error())
+func DeleteSku(sku string) mixin.ErrorCode {
+	if err := db.Delete(Sku{}, "sku = ? ", sku).Error; err != nil {
+		logrus.Errorf("[DeleteSku] Delete error %s", err.Error())
 		return mixin.ErrorServerDb
 	}
 
 	return mixin.StatusOK
 }
 
-func GetSkuMap() (map[SkuMapKey]string, mixin.ErrorCode) {
+func DeleteSkuBySizeID(id uint32) mixin.ErrorCode {
+	if err := db.Delete(Sku{}, "size_id = ? ", id).Error; err != nil {
+		logrus.Errorf("[DeleteSkuBySizeID] Delete error %s", err.Error())
+		return mixin.ErrorServerDb
+	}
+
+	return mixin.StatusOK
+}
+
+func DeleteSkuBySkuPropId(id uint32) mixin.ErrorCode {
+	if err := db.Delete(Sku{}, "sku_prop_id = ? ", id).Error; err != nil {
+		logrus.Errorf("[DeleteSkuBySkuPropId] Delete error %s", err.Error())
+		return mixin.ErrorServerDb
+	}
+
+	return mixin.StatusOK
+}
+
+
+func GetUrlIdSkuMap(urlID uint32) (map[SkuMapKey]string, mixin.ErrorCode) {
 	skuMap := make(map[SkuMapKey]string)
-	rows, err := db.Table("skus").Select("name, size, GROUP_CONCAT(sku)").Group("name, size").Rows()
+	rows, err := db.Table("skus").Select("sku_prop_id, size_id, GROUP_CONCAT(sku)").Where("url_id = ?", urlID).Group("sku_prop_id, size_id").Rows()
 	if err != nil {
 		return skuMap, mixin.ErrorServerDb
 	}
 	var (
-		name   string
-		size   string
-		skuStr string
+		skuPropID uint32
+		sizeID    uint32
+		skuStr    string
 	)
 	defer rows.Close()
 	for rows.Next() {
-		if err := rows.Scan(&name, &size, &skuStr); err != nil {
+		if err := rows.Scan(&skuPropID, &sizeID, &skuStr); err != nil {
 			return skuMap, mixin.ErrorServerDb
 		}
-		skuMap[SkuMapKey{name, size}] = skuStr
+		skuMap[SkuMapKey{skuPropID, sizeID}] = skuStr
 	}
 
 	return skuMap, mixin.StatusOK
 }
+
