@@ -219,7 +219,7 @@ func (s *AccountService) GetRoutes() []server.Route {
 
 
 		server.Route{
-			Name:        "add skuprops",
+			Name:        "list skuprops",
 			Method:      "GET",
 			Pattern:     "/{user_id:[0-9]+}/skuprops",
 			HandlerFunc: s.list_sku_props,
@@ -244,6 +244,13 @@ func (s *AccountService) GetRoutes() []server.Route {
 			Method:      "POST",
 			Pattern:     "/{user_id:[0-9]+}/skuprops/update",
 			HandlerFunc: s.update_sku_props,
+			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
+		},
+		server.Route{
+			Name:        "list sizes",
+			Method:      "GET",
+			Pattern:     "/{user_id:[0-9]+}/size",
+			HandlerFunc: s.list_size,
 			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
 		},
 		server.Route{
