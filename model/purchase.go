@@ -1,6 +1,7 @@
 package model
 
 import (
+	"fmt"
 	"github.com/jinzhu/gorm"
 	"sku-manage/mixin"
 	"time"
@@ -57,26 +58,26 @@ func GetPurchaseByUrlIdSku(sku string, orderID uint32) (Purchase, mixin.ErrorCod
 func GetPurchaseByOrderId(orderID uint32) ([]Purchase, mixin.ErrorCode) {
 	purchases := []Purchase{}
 
-	if err := db.Table("purchasees").Where("order_id = ?", orderID).Find(&purchases).Error; err != nil {
+	if err := db.Table("purchases").Where("order_id = ?", orderID).Find(&purchases).Error; err != nil {
 		logrus.Errorf(err.Error())
 		return nil, mixin.ErrorServerDb
 	}
 	return purchases, mixin.StatusOK
 }
 
-func DeletePurchaseByRoleId(roleId uint32) mixin.ErrorCode {
-	if err := db.Where("role_id = ?", roleId).Delete(Purchase{}); err != nil {
-		logrus.Errorf("[DeletePurchaseRoleId] Delete error %s", err.Error)
+func DeletePurchaseByOrderId(roleId uint32) mixin.ErrorCode {
+	if err := db.Where("order_id = ?", roleId).Delete(Purchase{}).Error; err != nil {
+		logrus.Errorf("[DeletePurchaseRoleId] Delete error %s", err.Error())
 		return mixin.ErrorServerDb
 	}
 
 	return mixin.StatusOK
 }
 
-func GetPurchaseSkusByRoleId(roleId uint32) ([]Purchase, mixin.ErrorCode) {
+func GetPurchaseSkusByOrderId(roleId uint32) ([]Purchase, mixin.ErrorCode) {
 	purchases := []Purchase{}
 
-	if err := db.Where("role_id = ?", roleId).Find(&purchases).Error; err != nil {
+	if err := db.Where("order_id = ?", roleId).Find(&purchases).Error; err != nil {
 		logrus.Error(err.Error())
 		return nil, mixin.ErrorServerDb
 	}
@@ -84,31 +85,40 @@ func GetPurchaseSkusByRoleId(roleId uint32) ([]Purchase, mixin.ErrorCode) {
 	return purchases, mixin.StatusOK
 }
 
-type SkuNum struct {
-	SkuCount int
-	Total    int
+type PurchasesItem struct {
+	Sku         string `json:"sku"`
+	Num         int    `json:"number"`
+	SkuPropName string `json:"sku_prop_name"`
+	ImageUrl    string `json:"image_url"`
+	SizeName    string `json:"size_name"`
+	Url         string `json:"url"`
+	SkuNum      string `json:"sku_num"`
 }
 
-func GetOrderIdSkuNum() (map[uint32]SkuNum, mixin.ErrorCode) {
-	resp := make(map[uint32]SkuNum)
+func GetOrderIdPurchases(orderID uint32) (map[string][]PurchasesItem, mixin.ErrorCode) {
+	resp := make(map[string][]PurchasesItem)
 
-	rows, err := db.Table("purchases").Select("order_id, count(sku), sum(num)").Group("order_id").Rows()
+	sqlStr := `SELECT p.sku, p.num, sku_props.img_url, sku_props.name, sizes.name, urls.url FROM purchases AS p INNER JOIN skus ON p.sku = skus.sku
+INNER JOIN sku_props ON skus.sku_prop_id = sku_props.id
+INNER JOIN sizes ON skus.size_id = sizes.id
+INNER JOIN urls ON skus.url_id = urls.id where p.order_id = ?;`
+
+	rows, err := db.Raw(sqlStr, orderID).Rows()
 	if err != nil {
 		logrus.Error(err.Error())
 		return nil, mixin.ErrorServerDb
 	}
 
 	for rows.Next() {
-		var skuNum SkuNum
-		var orderID uint32
-		if err := rows.Scan(&orderID, &skuNum.SkuCount, &skuNum.Total); err != nil {
+		var item PurchasesItem
+		if err := rows.Scan(&item.Sku, &item.Num,  &item.ImageUrl,&item.SkuPropName, &item.SizeName, &item.Url); err != nil {
 			logrus.Error(err.Error())
 			return nil, mixin.ErrorServerDb
 		}
-		resp[orderID] = skuNum
+
+		item.SkuNum = fmt.Sprintf("%s 数量: %d", item.Sku, item.Num)
+		resp[item.Url] = append(resp[item.Url], item)
 	}
 
 	return resp, mixin.StatusOK
 }
-
-

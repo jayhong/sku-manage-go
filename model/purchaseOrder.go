@@ -8,8 +8,8 @@ import (
 
 //进货单
 type Order struct {
-	ID        uint32    `gorm:"primary_key" json:"role_id"`
-	OrderName string    `json:"role_name"`
+	ID        uint32    `gorm:"primary_key" json:"order_id"`
+	OrderName string    `json:"order_name"`
 	Descript  string    `json:"descript"`
 	SkuCount  int       `gorm:"-" json:"sku_count"`
 	Total     int       `gorm:"-" json:"total"`
@@ -18,24 +18,24 @@ type Order struct {
 }
 
 func GetOrder(id uint32) (Order, mixin.ErrorCode) {
-	var role Order
+	var order Order
 
-	result := db.First(&role, id)
+	result := db.First(&order, id)
 	if err := result.Error; err != nil {
 		if result.RecordNotFound() {
-			return role, mixin.ErrorOrderNoExist
+			return order, mixin.ErrorOrderNoExist
 		}
 		logrus.Errorf("[GetOrderName] error %s", err.Error)
-		return role, mixin.ErrorServerDb
+		return order, mixin.ErrorServerDb
 	}
 
-	return role, mixin.StatusOK
+	return order, mixin.StatusOK
 }
 
 func GetOrderByName(name string) (Order, mixin.ErrorCode) {
 	var order Order
 
-	result := db.Where("role_name = ?", name).First(&order)
+	result := db.Where("order_name = ?", name).First(&order)
 	if err := result.Error; err != nil {
 		if !result.RecordNotFound() {
 			return order, mixin.ErrorOrderNoExist
@@ -47,16 +47,16 @@ func GetOrderByName(name string) (Order, mixin.ErrorCode) {
 	return order, mixin.StatusOK
 }
 
-func CreateOrder(role Order) mixin.ErrorCode {
-	if err := db.Create(&role).Error; err != nil {
+func CreateOrder(order Order) mixin.ErrorCode {
+	if err := db.Create(&order).Error; err != nil {
 		logrus.Errorf("[CreateOrder] error %s", err.Error)
 		return mixin.ErrorServerDb
 	}
 	return mixin.StatusOK
 }
 
-func UpdateOrder(role Order) mixin.ErrorCode {
-	if err := db.Save(role).Error; err != nil {
+func UpdateOrder(order Order) mixin.ErrorCode {
+	if err := db.Save(order).Error; err != nil {
 		logrus.Errorf("[UpdateOrder] error %s", err.Error)
 		return mixin.ErrorServerDb
 	}
@@ -72,8 +72,8 @@ func DeleteOrder(id uint32) mixin.ErrorCode {
 }
 
 func GetAllOrder() ([]Order, mixin.ErrorCode) {
-	var roles []Order
-	result := db.Find(&roles)
+	var orders []Order
+	result := db.Find(&orders)
 	if err := result.Error; err != nil {
 		if result.RecordNotFound() {
 			return nil, mixin.ErrorOrderNoExist
@@ -82,6 +82,6 @@ func GetAllOrder() ([]Order, mixin.ErrorCode) {
 		return nil, mixin.ErrorServerDb
 	}
 
-	return roles, mixin.StatusOK
+	return orders, mixin.StatusOK
 }
 

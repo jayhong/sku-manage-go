@@ -7,11 +7,10 @@ import (
 )
 
 type Sku struct {
-	ID        uint32 `gorm:"primary key"`
 	UrlID     uint32 `json:"url_id"`
 	SkuPropID uint32 `json:"sku_prop_id"`
 	SizeID    uint32 `json:"size_id"`
-	Sku       string `gorm:"type:varchar(64);primary_key"`
+	Sku       string `gorm:"type:varchar(64);primary_key" json:"sku"`
 }
 
 type SkuMapKey struct {

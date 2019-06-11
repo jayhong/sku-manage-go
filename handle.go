@@ -623,18 +623,20 @@ func (this *AccountService) delete_order_handle(w http.ResponseWriter, r *http.R
 		return
 	}
 
-	if errCode := model.DeletePurchaseByRoleId(inParam["order_id"]); errCode != mixin.StatusOK {
+	if errCode := model.DeletePurchaseByOrderId(inParam["order_id"]); errCode != mixin.StatusOK {
 		this.ResponseErrCode(w, errCode)
 		return
 	}
 	this.ResponseOK(w, nil)
 }
-func (this *AccountService) list_role_handle(w http.ResponseWriter, r *http.Request) {
+func (this *AccountService) list_order_handle(w http.ResponseWriter, r *http.Request) {
 	orders, errCode := model.GetAllOrder()
 	if errCode != mixin.StatusOK {
 		this.ResponseErrCode(w, errCode)
 		return
 	}
+
+	// TODO 增加统计数据
 
 	this.ResponseOK(w, orders)
 }
@@ -919,7 +921,7 @@ type SkusInfo struct {
 	urlID     uint32   `json:"url_id"`
 	SkuPropID uint32   `json:"sku_prop_id"`
 	Name      string   `json:"name"`
-	ImgUrl    string   `json:"img_url"`
+	ImgUrl    string   `json:"image_url"`
 	SizeID    uint32   `json:"size_id"`
 	Size      string   `json:"size"`
 	Skus      []string `json:"skus"`
@@ -1012,13 +1014,8 @@ func (this *AccountService) del_sku(w http.ResponseWriter, r *http.Request) {
 }
 
 type PurchaseListResp struct {
-	Name         string           `json:"name"`
-	Size         string           `json:"size"`
-	Sku          []string         `json:"sku"`
-	Num          int              `json:"number"`
-	ImageUrl     string           `json:"image_url"`
-	PurchaseUrl  []string         `json:"purchase_url"`
-	PurchaseList []model.Purchase `json:"purchase_list"`
+	Url          []string              `json:"url"`
+	PurchaseList []model.PurchasesItem `json:"purchase_list"`
 }
 
 func (this *AccountService) purchase_list(w http.ResponseWriter, r *http.Request) {
@@ -1028,24 +1025,22 @@ func (this *AccountService) purchase_list(w http.ResponseWriter, r *http.Request
 		return
 	}
 
-	ps, errCode := model.GetPurchaseSkusByRoleId(orderId)
+	var resp []PurchaseListResp
+
+	purchaseList, errCode := model.GetOrderIdPurchases(orderId)
 	if errCode != mixin.StatusOK {
 		this.ResponseErrCode(w, errCode)
 		return
 	}
 
-	purMap := make(map[string]model.Purchase)
-	for i, p := range ps {
-		purMap[p.Sku] = ps[i]
+	for url, value := range purchaseList {
+		resp = append(resp, PurchaseListResp{
+			Url:          []string{url},
+			PurchaseList: value,
+		})
 	}
 
-	purchases, errCode := model.GetPurchaseByOrderId(orderId)
-	if errCode != mixin.StatusOK {
-		this.ResponseErrCode(w, errCode)
-		return
-	}
-
-	this.ResponseOK(w, purchases)
+	this.ResponseOK(w, resp)
 }
 func (this *AccountService) add_purchase(w http.ResponseWriter, r *http.Request) {
 	inParam := &model.Purchase{}

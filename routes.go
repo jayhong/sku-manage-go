@@ -320,10 +320,10 @@ func (s *AccountService) GetRoutes() []server.Route {
 			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
 		},
 		server.Route{
-			Name:        "list role",
+			Name:        "list order",
 			Method:      "GET",
-			Pattern:     "/{user_id:[0-9]+}/role",
-			HandlerFunc: s.list_role_handle,
+			Pattern:     "/{user_id:[0-9]+}/order",
+			HandlerFunc: s.list_order_handle,
 			Middlewares: []negroni.Handler{NewTokenMiddleware(s._jwt)},
 		},
 
