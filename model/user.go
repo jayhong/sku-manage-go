@@ -19,7 +19,6 @@ type User struct {
 	CompanyID    uint32    `json:"company_id"`
 	GroupID      uint32    `json:"group_id"`
 	RoleID       uint32    `json:"role_id"`
-	DepartmentID uint32    `json:"department_id"`
 	Enable       int       `json:"enable"`
 	Descript     string    `json:"descript"`
 	Ip           string    `json:"last_ip"`
@@ -126,7 +125,7 @@ func CheckPassword(userName, password string) (User, mixin.ErrorCode) {
 	return user, mixin.StatusOK
 }
 
-func ListUser(inParam map[string]interface{}) ([]User, mixin.ErrorCode) {
+func UserList(inParam map[string]interface{}) ([]User, mixin.ErrorCode) {
 	var users []User
 	var result *gorm.DB
 	if username, ok := inParam["username"]; ok {

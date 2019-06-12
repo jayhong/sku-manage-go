@@ -191,13 +191,11 @@ func (this *AccountService) delete_user_handle(w http.ResponseWriter, r *http.Re
 }
 func (this *AccountService) user_list_handle(w http.ResponseWriter, r *http.Request) {
 	inParam := map[string]interface{}{
-		"user_id":       r.Form.Get("user_id"),
-		"username":      r.Form.Get("username"),
-		"company_id":    r.Form.Get("company_id"),
-		"group_id":      r.Form.Get("group_id"),
-		"role_id":       r.Form.Get("role_id"),
-		"department_id": r.Form.Get("department_id"),
-		"enable":        r.Form.Get("enable"),
+		"user_id":    r.Form.Get("user_id"),
+		"username":   r.Form.Get("username"),
+		"company_id": r.Form.Get("company_id"),
+		"group_id":   r.Form.Get("group_id"),
+		"enable":     r.Form.Get("enable"),
 	}
 
 	for key, value := range inParam {
@@ -206,7 +204,11 @@ func (this *AccountService) user_list_handle(w http.ResponseWriter, r *http.Requ
 		}
 	}
 
-	var users []model.User
+	users, errCode := model.UserList(nil)
+	if errCode != mixin.StatusOK {
+		this.ResponseErrCode(w, errCode)
+		return
+	}
 
 	var list []UserListResponse
 
@@ -215,19 +217,17 @@ func (this *AccountService) user_list_handle(w http.ResponseWriter, r *http.Requ
 
 	for _, data := range users {
 		list = append(list, UserListResponse{
-			UserId:       data.ID,
-			UserName:     data.UserName,
-			Ip:           data.Ip,
-			LastTime:     time.Unix(data.LastTime, 0).Format("2006-01-02"),
-			Enable:       data.Enable,
-			Descript:     data.Descript,
-			CreatedAt:    data.CreatedAt.Format("2006-01-02"),
-			RoleID:       data.RoleID,
-			CompanyID:    data.CompanyID,
-			CompanyName:  companyMap[data.CompanyID],
-			GroupID:      data.GroupID,
-			GroupName:    groupMap[data.GroupID],
-			DepartmentID: data.DepartmentID,
+			UserId:      data.ID,
+			UserName:    data.UserName,
+			Ip:          data.Ip,
+			LastTime:    time.Unix(data.LastTime, 0).Format("2006-01-02"),
+			Enable:      data.Enable,
+			Descript:    data.Descript,
+			CreatedAt:   data.CreatedAt.Format("2006-01-02"),
+			CompanyID:   data.CompanyID,
+			CompanyName: companyMap[data.CompanyID],
+			GroupID:     data.GroupID,
+			GroupName:   groupMap[data.GroupID],
 		})
 	}
 
@@ -520,9 +520,17 @@ func (this *AccountService) del_group_handle(w http.ResponseWriter, r *http.Requ
 }
 
 func (this *AccountService) dict_handle(w http.ResponseWriter, r *http.Request) {
-	var companies []model.Company
-	var groups []model.Group
+	companies, errCode := model.GetAllCompany(nil)
+	if errCode != mixin.StatusOK {
+		this.ResponseErrCode(w, errCode)
+		return
+	}
 
+	groups, errCode := model.GetGroupList(nil)
+	if errCode != mixin.StatusOK {
+		this.ResponseErrCode(w, errCode)
+		return
+	}
 	var groupList []ListResp
 	for _, data := range groups {
 		groupList = append(groupList, ListResp{
@@ -539,8 +547,18 @@ func (this *AccountService) dict_handle(w http.ResponseWriter, r *http.Request) 
 
 func (this *AccountService) tree_handle(w http.ResponseWriter, r *http.Request) {
 	var tree []UserTree
-	var companies []model.Company
-	var groups []model.Group
+
+	companies, errCode := model.GetAllCompany(nil)
+	if errCode != mixin.StatusOK {
+		this.ResponseErrCode(w, errCode)
+		return
+	}
+
+	groups, errCode := model.GetGroupList(nil)
+	if errCode != mixin.StatusOK {
+		this.ResponseErrCode(w, errCode)
+		return
+	}
 
 	var groupList []ListResp
 	for _, data := range groups {
@@ -636,7 +654,14 @@ func (this *AccountService) list_order_handle(w http.ResponseWriter, r *http.Req
 		return
 	}
 
-	// TODO 增加统计数据
+	for i, order := range orders{
+		orders[i].CreateAtStr =  orders[i].CreatedAt.Format("2006-01-02 15:04:05")
+		orders[i].SkuCount, orders[i].Total, errCode = model.GetPurchaseCountByOrderId(order.ID)
+		if errCode != mixin.StatusOK {
+			this.ResponseErrCode(w, errCode)
+			return
+		}
+	}
 
 	this.ResponseOK(w, orders)
 }
