@@ -14,10 +14,18 @@ import (
 
 	"github.com/sirupsen/logrus"
 )
-// 修改成可配置
-const host = "https://127.0.0.1/file/"
-const PICTUREDIR = "./file"
 
+// 修改成可配置
+const host = "http://127.0.0.1:8500/v1/inspect/file/"
+const PICTUREDIR = "./file/"
+
+var fs = http.FileServer(http.Dir(PICTUREDIR))
+
+func (this *AccountService) get_file(w http.ResponseWriter, r *http.Request) {
+	http.StripPrefix("/v1/inspect/file", fs).ServeHTTP(w, r)
+}
+
+// 上传单个文件
 func (this *AccountService) upload_file_handle(w http.ResponseWriter, r *http.Request) {
 	r.ParseMultipartForm(32 << 20)
 	file, head, err := r.FormFile("file")
@@ -62,6 +70,7 @@ func (this *AccountService) upload_file_handle(w http.ResponseWriter, r *http.Re
 	fmt.Fprint(w, host+newName)
 }
 
+// 上传多个文件
 func (this *AccountService) upload_files_handle(w http.ResponseWriter, r *http.Request) {
 	r.ParseMultipartForm(32 << 20)
 	mp := r.MultipartForm
@@ -127,7 +136,6 @@ func (this *AccountService) upload_files_handle(w http.ResponseWriter, r *http.R
 	this.ResponseOK(w, map[string][]string{
 		"url": resp,
 	})
-
 }
 
 type fileState struct {
@@ -188,42 +196,3 @@ func generalUuid() (string, error) {
 
 	return fmt.Sprintf("%x-%x-%x-%x-%x-%x", unix32bits, buff[0:2], buff[2:4], buff[4:6], buff[6:8], buff[8:]), nil
 }
-
-////不使用nginx上传组件
-//func (this *AccountService) uploadOne(w http.ResponseWriter, r *http.Request) {
-//	//设置内存大小
-//	r.ParseMultipartForm(32 << 20)
-//	//获取上传的第一个文件
-//	file, header, err := r.FormFile("file")
-//	defer file.Close()
-//	if err != nil {
-//		log.Fatal(err)
-//	}
-
-//	fileNameSli := strings.Split(header.Filename, ".")
-//	if len(fileNameSli) < 2 {
-//		logrus.Debugf("[AccountService.upload_file_handle] file format error")
-//		this.ResponseErrCode(w, mixin.ErrorServerUnKnow)
-//		return
-//	}
-
-//	uuid, err := generalUuid()
-//	if err != nil {
-//		logrus.Debugf("[AccountService.upload_file_handle] error %s", err.Error())
-//		this.ResponseErrCode(w, mixin.ErrorServerUnKnow)
-//		return
-//	}
-
-//	newName := PICTUREDIR + "/" + uuid + "." + fileNameSli[len(fileNameSli)-1]
-
-//	//创建上传文件
-//	cur, err := os.Create(newName)
-//	defer cur.Close()
-//	if err != nil {
-//		log.Fatal(err)
-//	}
-//	//把上传文件数据拷贝到我们新建的文件
-//	io.Copy(cur, file)
-
-//	fmt.Fprint(w, newName)
-//}

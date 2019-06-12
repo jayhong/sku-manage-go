@@ -7,6 +7,8 @@
 _obj
 _test
 .idea/
+log/sku-manage/
+file/
 
 # Architecture specific extensions/prefixes
 *.[568vq]
@@ -21,6 +23,6 @@ _cgo_export.*
 _testmain.go
 config.json
 config.yml
-inspect
+sku-manage
 
 *.exe

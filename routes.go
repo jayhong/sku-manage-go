@@ -172,7 +172,12 @@ func (s *AccountService) GetRoutes() []server.Route {
 			Pattern:     "/upload/file",
 			HandlerFunc: s.upload_file_handle,
 		},
-
+		server.Route{
+			Name:        "download file",
+			Method:      "GET",
+			Pattern:     "/file/{file_name}",
+			HandlerFunc: s.get_file,
+		},
 		//url 管理
 		server.Route{
 			Name:        "add url",
