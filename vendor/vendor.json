@@ -123,6 +123,18 @@
 			"revisionTime": "2017-09-06T05:15:25Z"
 		},
 		{
+			"checksumSHA1": "rXqzjkfStc6C8d7DDOXrmAv/fH8=",
+			"path": "github.com/PuerkitoBio/goquery",
+			"revision": "3dcf72e6c17f694381a21592651ca1464ded0e10",
+			"revisionTime": "2019-01-09T23:07:04Z"
+		},
+		{
+			"checksumSHA1": "RIh1dcM7jKzdb/ZNYrKn9SaIaCw=",
+			"path": "github.com/andybalholm/cascadia",
+			"revision": "680b6a57bda4f657485ad44bdea42342ead737bc",
+			"revisionTime": "2018-10-12T15:44:24Z"
+		},
+		{
 			"checksumSHA1": "04NYCjSZ6mYCabqIZzm3tJtmxb8=",
 			"path": "github.com/asaskevich/govalidator",
 			"revision": ""
@@ -311,6 +323,18 @@
 			"revision": ""
 		},
 		{
+			"checksumSHA1": "bONEZcbkYKiPyABrecOLzHomjPU=",
+			"path": "golang.org/x/net/html",
+			"revision": "f4e77d36d62c17c2336347bb2670ddbd02d092b7",
+			"revisionTime": "2019-05-02T22:26:14Z"
+		},
+		{
+			"checksumSHA1": "XtSbs1gpyaEsIqf6VRhJsgOQe5U=",
+			"path": "golang.org/x/net/html/atom",
+			"revision": "f4e77d36d62c17c2336347bb2670ddbd02d092b7",
+			"revisionTime": "2019-05-02T22:26:14Z"
+		},
+		{
 			"checksumSHA1": "t22+WEerVhMV3bvATrIQnB9sSIQ=",
 			"path": "golang.org/x/oauth2",
 			"revision": "bb50c06baba3d0c76f9d125c0719093e315b5b44",
@@ -331,6 +355,30 @@
 			"checksumSHA1": "9YX4DNBhOM8krIjoT9eT2fnh1G0=",
 			"path": "golang.org/x/sys/windows",
 			"revision": ""
+		},
+		{
+			"checksumSHA1": "tqqo7DEeFCclb58XbN44WwdpWww=",
+			"path": "golang.org/x/text/encoding",
+			"revision": "342b2e1fbaa52c93f31447ad2c6abc048c63e475",
+			"revisionTime": "2018-12-15T17:52:45Z"
+		},
+		{
+			"checksumSHA1": "zeHyHebIZl1tGuwGllIhjfci+wI=",
+			"path": "golang.org/x/text/encoding/internal",
+			"revision": "342b2e1fbaa52c93f31447ad2c6abc048c63e475",
+			"revisionTime": "2018-12-15T17:52:45Z"
+		},
+		{
+			"checksumSHA1": "46UIK1h/DTupMdRnLkijrEIwzv4=",
+			"path": "golang.org/x/text/encoding/internal/identifier",
+			"revision": "342b2e1fbaa52c93f31447ad2c6abc048c63e475",
+			"revisionTime": "2018-12-15T17:52:45Z"
+		},
+		{
+			"checksumSHA1": "55UdScb+EMOCPr7OW0hCwDsVxpg=",
+			"path": "golang.org/x/text/encoding/simplifiedchinese",
+			"revision": "342b2e1fbaa52c93f31447ad2c6abc048c63e475",
+			"revisionTime": "2018-12-15T17:52:45Z"
 		},
 		{
 			"checksumSHA1": "iKjOIvi+CqRe3AtbF/uq3gdPHLk=",
@@ -364,5 +412,5 @@
 			"revisionTime": "2017-11-21T08:26:36Z"
 		}
 	],
-	"rootPath": "inspect"
+	"rootPath": "sku-manage"
 }
