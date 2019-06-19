@@ -6,9 +6,9 @@ import (
 )
 
 type Size struct {
-	ID    uint32 `gorm:"primary_key" json:"size_id"`
-	UrlID uint32 `json:"url_id"`
-	Name  string `gorm:"type:varchar(64);" json:"name"`
+	ID        uint32 `gorm:"primary_key" json:"size_id"`
+	SkuPrefix string `json:"sku_prefix"`
+	Name      string `gorm:"type:varchar(64);" json:"name"`
 }
 
 func GetSize(id uint32) (Size, mixin.ErrorCode) {
@@ -55,19 +55,19 @@ func DeleteSize(id uint32) mixin.ErrorCode {
 	return mixin.StatusOK
 }
 
-func DeleteSizeByUrlID(id uint32) mixin.ErrorCode {
-	if err := db.Where("url_id = ?", id).Delete(Size{}).Error; err != nil {
-		logrus.Errorf("[DeleteSize] error %s", err.Error)
+func DeleteSizeBySkuPrefix(skuPrefix string) mixin.ErrorCode {
+	if err := db.Where("sku_prefix = ?", skuPrefix).Delete(Size{}).Error; err != nil {
+		logrus.Errorf("[DeleteSizeBySkuPrefix] error %s", err.Error)
 		return mixin.ErrorServerDb
 	}
 	return mixin.StatusOK
 }
 
-func GetSizeByUrlID(id uint32) ([]Size, mixin.ErrorCode) {
+func GetSizeBySkuPrefix(skuPrefix string) ([]Size, mixin.ErrorCode) {
 	var sizes []Size
 
-	if err := db.Where("url_id = ?", id).Find(&sizes).Error; err != nil {
-		logrus.Errorf("[GetSizeByUrlID] error %s", err.Error)
+	if err := db.Where("sku_prefix = ?", skuPrefix).Find(&sizes).Error; err != nil {
+		logrus.Errorf("[GetSizeBySkuPrefix] error %s", err.Error)
 		return nil, mixin.ErrorServerDb
 	}
 

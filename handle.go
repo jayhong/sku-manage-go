@@ -654,8 +654,8 @@ func (this *AccountService) list_order_handle(w http.ResponseWriter, r *http.Req
 		return
 	}
 
-	for i, order := range orders{
-		orders[i].CreateAtStr =  orders[i].CreatedAt.Format("2006-01-02 15:04:05")
+	for i, order := range orders {
+		orders[i].CreateAtStr = orders[i].CreatedAt.Format("2006-01-02 15:04:05")
 		orders[i].SkuCount, orders[i].Total, errCode = model.GetPurchaseCountByOrderId(order.ID)
 		if errCode != mixin.StatusOK {
 			this.ResponseErrCode(w, errCode)
@@ -689,9 +689,19 @@ func (this *AccountService) add_url_handle(w http.ResponseWriter, r *http.Reques
 		return
 	}
 
-	urlID, errCode := model.CreateURL(*inParam)
+	_, errCode := model.CreateURL(*inParam)
 	if errCode != mixin.StatusOK {
 		this.ResponseErrCode(w, errCode)
+		return
+	}
+	// 不重复采集尺码
+	u, errCode := model.GetUrlBySku(inParam.SkuPrefix)
+	if errCode != mixin.StatusOK {
+		this.ResponseErrCode(w, errCode)
+		return
+	}
+	if u.ID != 0 {
+		this.ResponseOK(w, nil)
 		return
 	}
 
@@ -706,9 +716,9 @@ func (this *AccountService) add_url_handle(w http.ResponseWriter, r *http.Reques
 	if len(sps) >= 1 {
 		for j, _ := range sps[0].Value {
 			skuProps = append(skuProps, model.SkuProp{
-				UrlID:  urlID,
-				Name:   sps[0].Value[j].Name,
-				ImgUrl: sps[0].Value[j].Url,
+				SkuPrefix: inParam.SkuPrefix,
+				Name:      sps[0].Value[j].Name,
+				ImgUrl:    sps[0].Value[j].Url,
 			})
 		}
 		if len(skuProps) > 0 {
@@ -723,8 +733,8 @@ func (this *AccountService) add_url_handle(w http.ResponseWriter, r *http.Reques
 	if len(sps) >= 2 {
 		for i, _ := range sps[1].Value {
 			sizes = append(sizes, model.Size{
-				UrlID: urlID,
-				Name:  sps[1].Value[i].Name,
+				SkuPrefix: inParam.SkuPrefix,
+				Name:      sps[1].Value[i].Name,
 			})
 		}
 		if len(sizes) > 0 {
@@ -758,32 +768,56 @@ func (this *AccountService) update_url_handle(w http.ResponseWriter, r *http.Req
 
 	this.ResponseOK(w, nil)
 }
+
+type DeleteSkuReq struct {
+	UrlID     uint32 `json:"url_id"`
+	SkuPrefix string `json:"sku_prefix"`
+}
+
 func (this *AccountService) del_url_handle(w http.ResponseWriter, r *http.Request) {
-	inParam := make(map[string]uint32)
+	var inParam DeleteSkuReq
 	if err := util.JsonDecode(r, &inParam); err != nil {
 		logrus.Errorf("[AccountService.del_url_handle] %s", err.Error())
 		this.ResponseErrCode(w, mixin.ErrorClientInvalidArgument)
 		return
 	}
 
-	if inParam["url_id"] == 0 {
+	// 考虑使用vailder
+	if inParam.UrlID == 0 {
 		this.ResponseErrCode(w, mixin.ErrorClientInvalidArgument)
 		return
 	}
 
-	errCode := model.DeleteURL(inParam["url_id"])
+	if inParam.SkuPrefix == "" {
+		this.ResponseErrCode(w, mixin.ErrorClientInvalidArgument)
+		return
+	}
+
+	urlID := cast.ToUint32(inParam.UrlID)
+	errCode := model.DeleteURL(urlID)
 	if errCode != mixin.StatusOK {
 		this.ResponseErrCode(w, errCode)
 		return
 	}
 
-	errCode = model.DeleteSizeByUrlID(inParam["url_id"])
+	// 判断url的sku prefix 是否还有连接，如果没有链接就将其删除
+	url, errCode := model.GetUrlBySku(inParam.SkuPrefix)
+	if errCode != mixin.StatusOK {
+		this.ResponseErrCode(w, errCode)
+		return
+	}
+	if url.ID != 0 {
+		this.ResponseOK(w, nil)
+		return
+	}
+
+	errCode = model.DeleteSizeBySkuPrefix(inParam.SkuPrefix)
 	if errCode != mixin.StatusOK {
 		this.ResponseErrCode(w, errCode)
 		return
 	}
 
-	errCode = model.DeleteSkuPropByUrlID(inParam["url_id"])
+	errCode = model.DeleteSkuPropBySkuPrefix(inParam.SkuPrefix)
 	if errCode != mixin.StatusOK {
 		this.ResponseErrCode(w, errCode)
 		return
@@ -837,14 +871,15 @@ func (this *AccountService) download_url_pic(w http.ResponseWriter, r *http.Requ
 }
 
 func (this *AccountService) list_sku_props(w http.ResponseWriter, r *http.Request) {
-	urlID := cast.ToUint32(r.Form.Get("url_id"))
-	skuProps, errCode := model.GetSkuPropByUrlID(urlID)
+	skuPrefix := r.Form.Get("sku_prefix")
+	skuProps, errCode := model.GetSkuPropBySkuPrefix(skuPrefix)
 	if errCode != mixin.StatusOK {
 		this.ResponseErrCode(w, errCode)
 		return
 	}
 	this.ResponseOK(w, skuProps)
 }
+
 func (this *AccountService) add_sku_props(w http.ResponseWriter, r *http.Request) {
 	inParam := &model.SkuProp{}
 	if err := this.validator.Validate(r, inParam); err != nil {
@@ -890,8 +925,8 @@ func (this *AccountService) delete_sku_props(w http.ResponseWriter, r *http.Requ
 }
 
 func (this *AccountService) list_size(w http.ResponseWriter, r *http.Request) {
-	urlID := cast.ToUint32(r.Form.Get("url_id"))
-	sizes, errCode := model.GetSizeByUrlID(urlID)
+	skuPrefix := r.Form.Get("sku_prefix")
+	sizes, errCode := model.GetSizeBySkuPrefix(skuPrefix)
 	if errCode != mixin.StatusOK {
 		this.ResponseErrCode(w, errCode)
 		return
@@ -955,20 +990,20 @@ type SkusInfo struct {
 func (this *AccountService) list_skus(w http.ResponseWriter, r *http.Request) {
 	var listResp []SkusInfo
 
-	urlID := cast.ToUint32(r.Form.Get("url_id"))
-	skuProps, errCode := model.GetSkuPropByUrlID(urlID)
+	skuPrefix := r.Form.Get("sku_prefix")
+	skuProps, errCode := model.GetSkuPropBySkuPrefix(skuPrefix)
 	if errCode != mixin.StatusOK {
 		this.ResponseErrCode(w, errCode)
 		return
 	}
 
-	sizes, errCode := model.GetSizeByUrlID(urlID)
+	sizes, errCode := model.GetSizeBySkuPrefix(skuPrefix)
 	if errCode != mixin.StatusOK {
 		this.ResponseErrCode(w, errCode)
 		return
 	}
 
-	skuMap, errCode := model.GetUrlIdSkuMap(urlID)
+	skuMap, errCode := model.GetSkuPrefixSkuMap(skuPrefix)
 	if errCode != mixin.StatusOK {
 		this.ResponseErrCode(w, errCode)
 		return
@@ -1045,10 +1080,6 @@ type PurchaseListResp struct {
 
 func (this *AccountService) purchase_list(w http.ResponseWriter, r *http.Request) {
 	orderId := cast.ToUint32(r.Form.Get("order_id"))
-	if orderId == 0 {
-		this.ResponseErrCode(w, mixin.ErrorClientInvalidArgument)
-		return
-	}
 
 	var resp []PurchaseListResp
 
@@ -1058,9 +1089,14 @@ func (this *AccountService) purchase_list(w http.ResponseWriter, r *http.Request
 		return
 	}
 
-	for url, value := range purchaseList {
+	for skuPrefix, value := range purchaseList {
+		urlStr, errCode := model.GetSkuPrefixUrl(skuPrefix)
+		if errCode != mixin.StatusOK {
+			this.ResponseOK(w, errCode)
+			return
+		}
 		resp = append(resp, PurchaseListResp{
-			Url:          []string{url},
+			Url:          strings.Split(urlStr, ","),
 			PurchaseList: value,
 		})
 	}

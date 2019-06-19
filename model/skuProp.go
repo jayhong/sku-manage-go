@@ -6,10 +6,10 @@ import (
 )
 
 type SkuProp struct {
-	ID     uint32 `gorm:"primary_key" json:"sku_prop_id"`
-	UrlID  uint32 `json:"url_id"`
-	Name   string `gorm:"type:varchar(64);" json:"name"`
-	ImgUrl string `json:"image_url"`
+	ID        uint32 `gorm:"primary_key" json:"sku_prop_id"`
+	SkuPrefix string `json:"sku_prefix"`
+	Name      string `gorm:"type:varchar(64);" json:"name"`
+	ImgUrl    string `json:"image_url"`
 }
 
 func GetSkuProp(id uint32) (SkuProp, mixin.ErrorCode) {
@@ -21,10 +21,10 @@ func GetSkuProp(id uint32) (SkuProp, mixin.ErrorCode) {
 	return skuProp, mixin.StatusOK
 }
 
-func GetSkuPropByUrlID(id uint32) ([]SkuProp, mixin.ErrorCode) {
+func GetSkuPropBySkuPrefix(skuPrefix string) ([]SkuProp, mixin.ErrorCode) {
 	var skuProp []SkuProp
 
-	if err := db.Where("url_id = ?", id).Find(&skuProp).Error; err != nil {
+	if err := db.Where("sku_prefix = ?", skuPrefix).Find(&skuProp).Error; err != nil {
 		logrus.Errorf("[GetSkuPropByUrlID] error %s", err.Error)
 		return nil, mixin.ErrorServerDb
 	}
@@ -67,9 +67,9 @@ func DeleteSkuProp(id uint32) mixin.ErrorCode {
 	return mixin.StatusOK
 }
 
-func DeleteSkuPropByUrlID(id uint32) mixin.ErrorCode {
-	if err := db.Where("url_id = ?", id).Delete(SkuProp{}).Error; err != nil {
-		logrus.Errorf("[DeleteSkuPropByUrlID] error %s", err.Error)
+func DeleteSkuPropBySkuPrefix(skuPrefix string) mixin.ErrorCode {
+	if err := db.Where("sku_prefix = ?", skuPrefix).Delete(SkuProp{}).Error; err != nil {
+		logrus.Errorf("[DeleteSkuPropBySkuPrefix] error %s", err.Error)
 		return mixin.ErrorServerDb
 	}
 	return mixin.StatusOK

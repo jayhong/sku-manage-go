@@ -7,7 +7,7 @@ import (
 )
 
 type Sku struct {
-	UrlID     uint32 `json:"url_id"`
+	SkuPrefix string `json:"sku_prefix"`
 	SkuPropID uint32 `json:"sku_prop_id"`
 	SizeID    uint32 `json:"size_id"`
 	Sku       string `gorm:"type:varchar(64);primary_key" json:"sku"`
@@ -63,9 +63,9 @@ func DeleteSkuBySkuPropId(id uint32) mixin.ErrorCode {
 	return mixin.StatusOK
 }
 
-func GetUrlIdSkuMap(urlID uint32) (map[SkuMapKey]string, mixin.ErrorCode) {
+func GetSkuPrefixSkuMap(skuPrefix string) (map[SkuMapKey]string, mixin.ErrorCode) {
 	skuMap := make(map[SkuMapKey]string)
-	rows, err := db.Table("skus").Select("sku_prop_id, size_id, GROUP_CONCAT(sku)").Where("url_id = ?", urlID).Group("sku_prop_id, size_id").Rows()
+	rows, err := db.Table("skus").Select("sku_prop_id, size_id, GROUP_CONCAT(sku)").Where("sku_prefix = ?", skuPrefix).Group("sku_prop_id, size_id").Rows()
 	if err != nil {
 		return skuMap, mixin.ErrorServerDb
 	}

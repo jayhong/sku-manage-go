@@ -282,7 +282,7 @@ func (s *AccountService) GetRoutes() []server.Route {
 
 		// skus列表
 		server.Route{
-			Name:        "list skuprops",
+			Name:        "list sku",
 			Method:      "POST",
 			Pattern:     "/{user_id:[0-9]+}/skus",
 			HandlerFunc: s.list_skus,

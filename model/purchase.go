@@ -69,7 +69,7 @@ func GetPurchaseCountByOrderId(orderID uint32) (skuCount, total int, errCode mix
 	err := row.Scan(&skuCount, &total)
 	if err != nil {
 		logrus.Errorf(err.Error())
-		return 0, 0,  mixin.StatusOK
+		return 0, 0, mixin.StatusOK
 	}
 	return skuCount, total, mixin.StatusOK
 }
@@ -81,17 +81,17 @@ type PurchasesItem struct {
 	SkuPropName string `json:"sku_prop_name"`
 	ImageUrl    string `json:"image_url"`
 	SizeName    string `json:"size_name"`
-	Url         string `json:"url"`
+	SkuPrefix   string `json:"sku_prefix"`
 	SkuNum      string `json:"sku_num"`
 }
 
 func GetOrderIdPurchases(orderID uint32) (map[string][]PurchasesItem, mixin.ErrorCode) {
 	resp := make(map[string][]PurchasesItem)
 
-	sqlStr := `SELECT p.id, p.sku, p.num, sku_props.img_url, sku_props.name, sizes.name, urls.url FROM purchases AS p INNER JOIN skus ON p.sku = skus.sku
+	sqlStr := `SELECT p.id, p.sku, p.num, sku_props.img_url, sku_props.name, sizes.name, sku_props.sku_prefix FROM purchases AS p INNER JOIN skus ON p.sku = skus.sku
 INNER JOIN sku_props ON skus.sku_prop_id = sku_props.id
 INNER JOIN sizes ON skus.size_id = sizes.id
-INNER JOIN urls ON skus.url_id = urls.id where p.order_id = ?;`
+where p.order_id = ?;`
 
 	rows, err := db.Raw(sqlStr, orderID).Rows()
 	if err != nil {
@@ -101,13 +101,13 @@ INNER JOIN urls ON skus.url_id = urls.id where p.order_id = ?;`
 
 	for rows.Next() {
 		var item PurchasesItem
-		if err := rows.Scan(&item.PurchasesID, &item.Sku, &item.Num, &item.ImageUrl, &item.SkuPropName, &item.SizeName, &item.Url); err != nil {
+		if err := rows.Scan(&item.PurchasesID, &item.Sku, &item.Num, &item.ImageUrl, &item.SkuPropName, &item.SizeName, &item.SkuPrefix); err != nil {
 			logrus.Error(err.Error())
 			return nil, mixin.ErrorServerDb
 		}
 
 		item.SkuNum = fmt.Sprintf("%s 数量: %d", item.Sku, item.Num)
-		resp[item.Url] = append(resp[item.Url], item)
+		resp[item.SkuPrefix] = append(resp[item.SkuPrefix], item)
 	}
 
 	return resp, mixin.StatusOK
