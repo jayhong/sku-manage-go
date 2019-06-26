@@ -16,6 +16,7 @@ import (
 	"regexp"
 	"strings"
 	"time"
+	"sku-manage/config"
 )
 
 var (
@@ -365,9 +366,10 @@ func GetHtml(bossurl string) *http.Response {
 }
 
 func addHeader(req *http.Request) *http.Request {
-	req.Header.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36") //模拟浏览器User-Agent
+
+	req.Header.Add("user-agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36") //模拟浏览器User-Agent
 	req.Header.Add("upgrade-insecure-requests", "1")
-	//req.Header.Add("cookie", `UM_distinctid=169b9663a1024c-0610d13d3f621d-5f1d3a17-100200-169b9663a1181; cna=zPIcFRPem3wCAQ6bnNGsvpWL; ali_ab=218.18.229.179.1553593679505.0; hng=CN%7Czh-CN%7CCNY%7C156; h_keys="%u91d1%u521a%u53d8%u5f62%u98de%u673a#%u6298%u53e0%u7bb1"; ad_prefer="2019/05/24 10:16:03"; cookie2=1b27ead2f1df197cd602757c68f5289b; t=cdcef7f2c7e9abfb623db7fc4d2ed773; _tb_token_=ed5365e111e53; __wapcsf__=1; alicnweb=homeIdttS%3D72684858764667525296251236198019265397%7ChomeIdttSAction%3Dtrue%7Ctouch_tb_at%3D1559530186745%7Clastlogonid%3Dtb21014790; cookie1=BvXn%2FQU7MfUXazIubvQL%2B%2BCkvgZm9HAdPqkuP4MZy4k%3D; cookie17=UNDVc8fWLWFBIA%3D%3D; sg=151; csg=3e0f88c9; lid=counting111; unb=3011023735; __cn_logon__=true; __cn_logon_id__=counting111; ali_apache_track=c_mid=b2b-3011023735808f2|c_lid=counting111|c_ms=1|c_mt=3; ali_apache_tracktmp=c_w_signed=Y; _nk_=counting111; last_mid=b2b-3011023735808f2; _csrf_token=1559530207141; _is_show_loginId_change_block_=b2b-3011023735808f2_false; _show_force_unbind_div_=b2b-3011023735808f2_false; _show_sys_unbind_div_=b2b-3011023735808f2_false; _show_user_unbind_div_=b2b-3011023735808f2_false; CNZZDATA1253659577=277548610-1553592267-https%253A%252F%252Fs.1688.com%252F%7C1559527168; __rn_alert__=false; l=bBxXyQq7vAuqf3MSBOCZCQhfhk79jIRxjuSJcRxMi_5Iq9L6fabOlUUtShp6Vj5R_qTH4keiqTy9-etkx; isg=BMnJNn-F8YwbDI2VLr6ZX08s2PWPArdLNj31WWs-RrDvsunEsWWPGJTo9Fah2VWA`)
+	req.Header.Add("cookie", config.SrvConfig.Server.Cookie)
 	req.Header.Add("cache-control", "max-age=0")
 	req.Header.Add("accept-language", "zh-CN,zh;q=0.9,zh-TW;q=0.8,en;q=0.7")
 	req.Header.Add("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3")

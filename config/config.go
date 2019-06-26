@@ -6,7 +6,7 @@ import (
 
 	"sku-manage/mysql"
 
-	redis "github.com/garyburd/redigo/redis"
+	"github.com/garyburd/redigo/redis"
 )
 
 var SrvConfig = &Config{}
@@ -26,6 +26,7 @@ type ServerConfig struct {
 	Ip2region string `json:"ip2region" yaml:"ip2region"`
 	CertFile  string `json:"cert_file" yaml:"cert_file"`
 	KeyFile   string `json:"key_file" yaml:"key_file"`
+	Cookie    string `json:"cookie" yaml:"cookie"`
 }
 
 type MysqlConfig struct {

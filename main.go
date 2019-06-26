@@ -37,7 +37,6 @@ var (
 )
 
 func main() {
-
 	flag.Usage = usage
 	flag.Parse()
 	if *helpShort || *helpLong {
